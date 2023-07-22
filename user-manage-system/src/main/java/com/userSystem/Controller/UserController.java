@@ -40,4 +40,21 @@ public class UserController {
         LOGGER.info("@@@@ UserController: Received get All users request");
         return userService.getAllUsers();
     }
+
+    //Post Request - updateUser  http://localhost:8080/api/User/updateUser
+    @PostMapping("updateUser")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        LOGGER.info("@@@@ UserController: Received update user Request with User: {}", user);
+        User userSaved = userService.updateUser(user);
+        return userSaved != null ? new ResponseEntity<>(userSaved, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    //Delete Request - deleteUser  http://localhost:8080/api/User/deleteUser
+    @DeleteMapping("deleteUser")
+    public ResponseEntity<String> deleteUser(@RequestBody User user) {
+        LOGGER.info("@@@@ UserController: Received delete user Request for User: {}", user);
+        Boolean userDeleted = userService.deleteUser(user);
+        return userDeleted != Boolean.FALSE ? new ResponseEntity<>("User deleted successfully!", HttpStatus.OK) :
+                new ResponseEntity<>("Ohh No,User doesn't exist in database!", HttpStatus.OK);
+    }
 }
