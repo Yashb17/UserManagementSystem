@@ -1,6 +1,7 @@
 package com.userSystem.Service;
 
 import com.userSystem.Controller.UserController;
+import com.userSystem.Dto.UserDTO;
 import com.userSystem.Entity.User;
 
 import java.util.List;
@@ -8,13 +9,13 @@ import java.util.Optional;
 
 public interface IUserService{
 
-    User createUser(User user);
+    UserDTO createUser(UserDTO userDTO);
 
-    Optional<User> findUserById(Long id);
+    Optional<UserDTO> findUserDTOById(Long id);
 
-    List<User> getAllUsers();
+    List<UserDTO> getAllUsers();
 
-    User updateUser(User user);
+    UserDTO updateUser(UserDTO userDTO);
 
-    Boolean deleteUser(User user);
+    Boolean deleteUser(UserDTO userDTO);
 }
