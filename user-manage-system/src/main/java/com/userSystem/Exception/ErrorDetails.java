@@ -1,6 +1,4 @@
 package com.userSystem.Exception;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
