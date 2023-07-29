@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     private static final String userNotFoundCode = "USER_NOT_FOUND";
+    private static final String internalServerError = "INTERNAL_SERVER_ERROR";
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException,
@@ -24,5 +25,17 @@ public class GlobalExceptionHandler {
                 userNotFoundCode
         );
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDetails> handleGlobalException(Exception globalException,
+                                                                        WebRequest webRequest){
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                globalException.getMessage(),
+                webRequest.getDescription(false),
+                internalServerError
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
